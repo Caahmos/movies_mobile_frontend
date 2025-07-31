@@ -1,0 +1,106 @@
+import { Slot, Tabs } from "expo-router";
+import { Image, ImageBackground, Text, View } from "react-native";
+import { images } from '@/constants/images';
+import { icons } from "@/constants/icons";
+
+
+
+const TabsIcon = ({focused, icon, title}: any) => {
+  if(focused) {
+    return (
+      <ImageBackground
+        source={images.highlight}
+        className="flex flex-row w-full min-w-[112px] min-h-16 mt-5 justify-center items-center rounded-full overflow-hidden">
+        <Image source={icon} tintColor='#0f0D23' className="size-5" />
+        <Text className="text-secondary text-base font-semibold ml-2">{title}</Text>
+      </ImageBackground>
+    );
+  }
+  
+  return (
+    <View className="size-full justify-center items-center mt-5 rounded-full">
+      <Image source={icon} tintColor="#A8B5DB" className="size-5" />
+    </View>
+  );
+}
+
+export default function _Layout() {
+  return (
+    <Tabs 
+    screenOptions={{
+      tabBarShowLabel: false,
+      tabBarItemStyle: {
+        width: '100%',
+        height: '100%',
+        justifyContent: 'center',
+        alignItems: 'center'
+      },
+      tabBarStyle: {
+        backgroundColor: '#0f0D23',
+        borderRadius: 80,
+        marginHorizontal: 20,
+        marginBottom: 56,
+        height: 42,
+        position: 'absolute',
+        overflow: 'hidden',
+        borderWidth: 0,
+        borderTopWidth: 0,
+        elevation: 0, 
+        shadowOpacity: 0, 
+      }
+    }}>
+      <Tabs.Screen 
+      name="index" 
+      options={{
+        title: "Home",
+        headerShown: false,
+        tabBarIcon: ({ focused }) => (
+          <TabsIcon
+            focused={focused}
+            icon={icons.home}
+            title='Home' 
+          />
+        )
+      }} />
+      <Tabs.Screen
+        name="search" 
+        options={{
+          title: "Search",
+          headerShown: false,
+          tabBarIcon: ({ focused }) => (
+            <TabsIcon
+            focused={focused}
+            icon={icons.search}
+            title='Search' 
+          />
+          )
+        }} />
+      <Tabs.Screen 
+      name="saved" 
+      options={{
+        title: "Saved",
+        headerShown: false,
+        tabBarIcon: ({ focused }) => (
+          <TabsIcon
+            focused={focused}
+            icon={icons.save}
+            title='Saved' 
+          />
+        )
+      }} />
+      <Tabs.Screen 
+      name="profile" 
+      options={{
+        title: "Profile",
+        headerShown: false,
+        tabBarIcon: ({ focused }) => (
+          <TabsIcon
+            focused={focused}
+            icon={icons.person}
+            title='Profile' 
+          />
+        )
+      }} />
+    </Tabs>
+  );
+}
