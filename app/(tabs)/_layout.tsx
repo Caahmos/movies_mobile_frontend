@@ -2,10 +2,11 @@ import { Slot, Tabs } from "expo-router";
 import { Image, ImageBackground, Text, View } from "react-native";
 import { images } from '@/constants/images';
 import { icons } from "@/constants/icons";
-
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 
 const TabsIcon = ({focused, icon, title}: any) => {
+
   if(focused) {
     return (
       <ImageBackground
@@ -25,6 +26,8 @@ const TabsIcon = ({focused, icon, title}: any) => {
 }
 
 export default function _Layout() {
+  const insets = useSafeAreaInsets();
+
   return (
     <Tabs 
     screenOptions={{
@@ -39,7 +42,7 @@ export default function _Layout() {
         backgroundColor: '#0f0D23',
         borderRadius: 80,
         marginHorizontal: 20,
-        marginBottom: 56,
+        marginBottom: insets.bottom ,
         height: 42,
         position: 'absolute',
         overflow: 'hidden',
